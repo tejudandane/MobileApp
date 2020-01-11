@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Mine.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mine.Models;
 
 namespace Mine.Services
 {
@@ -31,12 +30,12 @@ namespace Mine.Services
         {
             datalist = new List<ItemModel>()
             {
-                new ItemModel { Text = "First item", Description="This is an item description." },
-                new ItemModel { Text = "Second item", Description="This is an item description." },
-                new ItemModel { Text = "Third item", Description="This is an item description." },
-                new ItemModel { Text = "Fourth item", Description="This is an item description." },
-                new ItemModel { Text = "Fifth item", Description="This is an item description." },
-                new ItemModel { Text = "Sixth item", Description="This is an item description." }
+                new ItemModel { Name = "First item", Description="This is an item description." },
+                new ItemModel { Name = "Second item", Description="This is an item description." },
+                new ItemModel { Name = "Third item", Description="This is an item description." },
+                new ItemModel { Name = "Fourth item", Description="This is an item description." },
+                new ItemModel { Name = "Fifth item", Description="This is an item description." },
+                new ItemModel { Name = "Sixth item", Description="This is an item description." }
             };
 
             return true;

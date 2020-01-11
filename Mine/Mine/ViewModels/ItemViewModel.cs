@@ -2,7 +2,7 @@
 
 namespace Mine.ViewModels
 {
-    public class ItemReadViewModel : BaseViewModel
+    public class ItemViewModel : BaseViewModel
     {
         /// <summary>
         /// The Item Model
@@ -15,9 +15,9 @@ namespace Mine.ViewModels
         /// The Data to be the passed in data
         /// </summary>
         /// <param name="data"></param>
-        public ItemReadViewModel(ItemModel data = null)
+        public ItemViewModel(ItemModel data = null)
         {
-            Title = data?.Text;
+            Title = data?.Name;
             Data = data;
         }
     }

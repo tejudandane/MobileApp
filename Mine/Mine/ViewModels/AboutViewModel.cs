@@ -1,18 +1,18 @@
-﻿using System;
-using System.Windows.Input;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-
-namespace Mine.ViewModels
+﻿namespace Mine.ViewModels
 {
+    /// <summary>
+    /// About View Model
+    /// </summary>
     public class AboutViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Constructor
+        /// 
+        /// Title is About
+        /// </summary>
         public AboutViewModel()
         {
             Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
         }
-
-        public ICommand OpenWebCommand { get; }
     }
 }

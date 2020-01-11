@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 using Mine.Models;
 using Mine.ViewModels;
+using System;
 
 namespace Mine.Views
 {
@@ -12,31 +13,43 @@ namespace Mine.Views
     /// <summary>
     /// The Read Page
     /// </summary>
-
     [DesignTimeVisible(false)]
     public partial class ItemReadPage : ContentPage
     {
-        ItemReadViewModel viewModel;
+        // View Model for Item
+        ItemViewModel ViewModel;
 
-        public ItemReadPage(ItemReadViewModel viewModel)
+        /// <summary>
+        /// Constructor called with a view model
+        /// This is the primary way to open the page
+        /// The viewModel is the data that should be displayed
+        /// </summary>
+        /// <param name="viewModel"></param>
+        public ItemReadPage(ItemViewModel data)
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = this.ViewModel = data;
         }
 
-        public ItemReadPage()
+        /// <summary>
+        /// Save calls to Update
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void Update_Clicked(object sender, EventArgs e)
         {
-            InitializeComponent();
+            await Navigation.PushAsync(new ItemUpdatePage(new ItemViewModel(ViewModel.Data)));
+        }
 
-            var data = new ItemModel
-            {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
-
-            viewModel = new ItemReadViewModel(data);
-            BindingContext = viewModel;
+        /// <summary>
+        /// Calls for Delete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void Delete_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ItemDeletePage(new ItemViewModel(ViewModel.Data)));
         }
     }
 }

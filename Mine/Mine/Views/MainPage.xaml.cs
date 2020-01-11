@@ -1,20 +1,25 @@
-﻿using System;
+﻿using Mine.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using Mine.Models;
 
 namespace Mine.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
+    /// <summary>
+    /// Main Page
+    /// </summary>
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
     {
+        // Collection of Navigation Pages
         Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+
+        /// <summary>
+        /// Constructor setups the behavior and menu pages
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -24,8 +29,14 @@ namespace Mine.Views
             MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
         }
 
+        /// <summary>
+        /// Process the Menu Selected item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task NavigateFromMenu(int id)
         {
+            // See if the Page is in memory, if not load it
             if (!MenuPages.ContainsKey(id))
             {
                 switch (id)
@@ -39,14 +50,18 @@ namespace Mine.Views
                 }
             }
 
+            // Switch to the Page
             var newPage = MenuPages[id];
 
             if (newPage != null && Detail != newPage)
             {
                 Detail = newPage;
 
+                // Android needs a deal, iOS and UWP does not
                 if (Device.RuntimePlatform == Device.Android)
+                {
                     await Task.Delay(100);
+                }
 
                 IsPresented = false;
             }

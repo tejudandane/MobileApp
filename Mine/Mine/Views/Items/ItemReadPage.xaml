@@ -7,9 +7,14 @@
              x:Class="Mine.Views.ItemReadPage"
              Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Update" Clicked="Update_Clicked" />
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
+    </ContentPage.ToolbarItems>
+    
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Data.Text}" d:Text="Item name" FontSize="Small"/>
+        <Label Text="{Binding Data.Name}" d:Text="Item name" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Data.Description}" d:Text="Item description" FontSize="Small"/>
     </StackLayout>

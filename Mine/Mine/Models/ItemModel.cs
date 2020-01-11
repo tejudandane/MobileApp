@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace Mine.Models
+﻿namespace Mine.Models
 {
-    public class ItemModel
+    /// <summary>
+    /// Item for the Game
+    /// </summary>
+    public class ItemModel : BaseModel
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string Text { get; set; }
-        public string Description { get; set; }
+        // Add Unique attributes for Item
     }
 }

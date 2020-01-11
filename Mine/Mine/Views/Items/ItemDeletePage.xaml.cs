@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 
-using Mine.Models;
 using Mine.ViewModels;
+using System;
 
 namespace Mine.Views
 {
@@ -12,31 +12,44 @@ namespace Mine.Views
     /// <summary>
     /// The Read Page
     /// </summary>
-
     [DesignTimeVisible(false)]
     public partial class ItemDeletePage : ContentPage
     {
-        ItemReadViewModel viewModel;
+        // View Model for Item
+        ItemViewModel viewModel;
 
-        public ItemDeletePage(ItemReadViewModel viewModel)
+        // Constructor for Delete takes a view model of what to delete
+        public ItemDeletePage(ItemViewModel data)
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = this.viewModel = data;
         }
 
-        public ItemDeletePage()
+        /// <summary>
+        /// Save calls to Update
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void Delete_Clicked(object sender, EventArgs e)
         {
-            InitializeComponent();
+            MessagingCenter.Send(this, "Delete", viewModel.Data);
 
-            var data = new ItemModel
-            {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
+            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
 
-            viewModel = new ItemReadViewModel(data);
-            BindingContext = viewModel;
+            await Navigation.PopAsync();
+        }
+
+        /// <summary>
+        /// Cancel and close this page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+
+            await Navigation.PopAsync();
         }
     }
 }
