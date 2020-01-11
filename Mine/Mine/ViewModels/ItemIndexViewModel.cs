@@ -25,6 +25,7 @@ namespace Mine.ViewModels
         public ItemIndexViewModel()
         {
             Title = "Browse";
+
             Dataset = new ObservableCollection<ItemModel>();
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDatasetCommand());
 
