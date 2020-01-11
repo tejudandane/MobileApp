@@ -11,15 +11,15 @@ namespace Mine.Views
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class NewItemPage : ContentPage
+    public partial class ItemUpdatePage : ContentPage
     {
-        public Item Item { get; set; }
+        public ItemModel Data { get; set; }
 
-        public NewItemPage()
+        public ItemUpdatePage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Data = new ItemModel
             {
                 Text = "Item name",
                 Description = "This is an item description."
@@ -30,7 +30,7 @@ namespace Mine.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "Create", Data);
             await Navigation.PopModalAsync();
         }
 

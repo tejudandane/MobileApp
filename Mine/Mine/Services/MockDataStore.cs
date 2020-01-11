@@ -6,55 +6,100 @@ using Mine.Models;
 
 namespace Mine.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<ItemModel>
     {
-        readonly List<Item> items;
+        /// <summary>
+        /// The Data List
+        /// This is where the items are stored
+        /// </summary>
+        public List<ItemModel> datalist;
 
+        /// <summary>
+        /// Constructor for the Storee
+        /// </summary>
         public MockDataStore()
         {
-            items = new List<Item>()
+            // Load the dataset
+            LoadDefaultData();
+        }
+
+        /// <summary>
+        /// Load the Default data
+        /// </summary>
+        /// <returns></returns>
+        public bool LoadDefaultData()
+        {
+            datalist = new List<ItemModel>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new ItemModel { Text = "First item", Description="This is an item description." },
+                new ItemModel { Text = "Second item", Description="This is an item description." },
+                new ItemModel { Text = "Third item", Description="This is an item description." },
+                new ItemModel { Text = "Fourth item", Description="This is an item description." },
+                new ItemModel { Text = "Fifth item", Description="This is an item description." },
+                new ItemModel { Text = "Sixth item", Description="This is an item description." }
             };
+
+            return true;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        /// <summary>
+        /// Add the data to the list
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>True for pass, else fail</returns>
+        public async Task<bool> CreateAsync(ItemModel data)
         {
-            items.Add(item);
+            datalist.Add(data);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        /// <summary>
+        /// Update the data with the information passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>True for pass, else fail</returns>
+        public async Task<bool> UpdateAsync(ItemModel data)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            var oldData = datalist.Where((ItemModel arg) => arg.Id == data.Id).FirstOrDefault();
+            datalist.Remove(oldData);
+            datalist.Add(data);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        /// <summary>
+        /// Deletes the Data passed in by
+        /// Removing it from the list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>True for pass, else fail</returns>
+        public async Task<bool> DeleteAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            var oldData = datalist.Where((ItemModel arg) => arg.Id == id).FirstOrDefault();
+            datalist.Remove(oldData);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        /// <summary>
+        /// Takes the ID and finds it in the data set
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Record if found else null</returns>
+        public async Task<ItemModel> ReadAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(datalist.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        /// <summary>
+        /// Get the full list of data
+        /// </summary>
+        /// <param name="forceRefresh"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<ItemModel>> IndexAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(datalist);
         }
     }
 }
