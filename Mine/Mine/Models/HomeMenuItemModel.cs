@@ -3,10 +3,10 @@
     /// <summary>
     /// Menu Item Lists
     /// </summary>
-    public enum MenuItemType
+    public enum MenuItemTypeEnum
     {
         Browse,
-        About
+        About,
     }
 
     /// <summary>
@@ -14,7 +14,7 @@
     /// </summary>
     public class HomeMenuItemModel
     {
-        public MenuItemType Id { get; set; }
+        public MenuItemTypeEnum Id { get; set; }
 
         public string Title { get; set; }
     }
