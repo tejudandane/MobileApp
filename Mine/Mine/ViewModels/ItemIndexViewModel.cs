@@ -68,6 +68,19 @@ namespace Mine.ViewModels
         }
 
         /// <summary>
+        /// API to update the Data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<bool> Update(ItemModel data)
+        {
+            Dataset.Add(data);
+            var result = await DataStore.UpdateAsync(data);
+
+            return true;
+        }
+
+        /// <summary>
         /// API to delete the Data
         /// </summary>
         /// <param name="data"></param>
@@ -86,6 +99,8 @@ namespace Mine.ViewModels
 
             return result;
         }
+
+
 
         /// <summary>
         /// API to read the Data

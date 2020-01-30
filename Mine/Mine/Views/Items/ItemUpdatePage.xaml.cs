@@ -28,6 +28,17 @@ namespace Mine.Views
             BindingContext = this.ViewModel = data;
         }
 
+
+        /// <summary>
+        /// Update the value based on changes to the stepper
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ValueValue.Text = String.Format("{0}", e.NewValue);
+        }
+
         /// <summary>
         /// Save calls to Update
         /// </summary>

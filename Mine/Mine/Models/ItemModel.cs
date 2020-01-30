@@ -10,5 +10,7 @@
         // The Value of the Item
 
         public int Value { get; set; } = 0;
+
+        public int Update { get; set; } = 0;
     }
 }
