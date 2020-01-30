@@ -52,6 +52,12 @@ namespace Mine.ViewModels
             {
                 await Delete(data as ItemModel);
             });
+
+            // Register the Update Message
+            MessagingCenter.Subscribe<ItemDeletePage, ItemModel>(this, "Update", async (obj, data) =>
+            {
+                await Update(data as ItemModel);
+            });
         }
 
         /// <summary>
@@ -74,10 +80,18 @@ namespace Mine.ViewModels
         /// <returns></returns>
         public async Task<bool> Update(ItemModel data)
         {
-            Dataset.Add(data);
-            var result = await DataStore.UpdateAsync(data);
+            //Check that the record exists, if it does not, then exit with false
+            var record = await Read(data.Id);
+            if (record == null)
+            {
+                return false;
+            }
 
-            return true;
+            record.Update(data);
+            var result = await DataStore.UpdateAsync(record);
+
+            await ExecuteLoadDataCommand();
+            return result;
         }
 
         /// <summary>
