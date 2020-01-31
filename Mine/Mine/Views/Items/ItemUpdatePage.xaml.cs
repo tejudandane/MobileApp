@@ -50,6 +50,10 @@ namespace Mine.Views
             //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
             await Navigation.PopModalAsync();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
 
         /// <summary>
         /// Cancel and close this page
