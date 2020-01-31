@@ -46,6 +46,12 @@ namespace Mine.Views
             await Navigation.PopModalAsync();
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
+
         /// <summary>
         /// Cancel the Create
         /// </summary>
