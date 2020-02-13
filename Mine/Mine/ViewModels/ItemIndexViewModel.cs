@@ -44,8 +44,14 @@ namespace Mine.ViewModels
         /// <summary>
         /// Connection to the Data store
         /// </summary>
-        public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
+        // public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
 
+        public IDataStore<ItemModel> DataSource_Mock => new MockDataStore();
+        public IDataStore<ItemModel> DataSource_SQL => new DatabaseService();
+
+        public IDataStore<ItemModel> DataStore;
+
+        public int CurrentDataSource = 0;
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
 
@@ -80,6 +86,25 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+        }
+
+        public bool SetDataSource(int isSQL)
+        {
+            if (isSQL == 1)
+            {
+                DataStore = DataSource_SQL;
+                CurrentDataSource = 1;
+            }
+            else
+            {
+                DataStore = DataSource_Mock;
+                CurrentDataSource = 0;
+            }
+
+            // Set Flag for Refresh
+            SetNeedsRefresh(true);
+
+            return true;
         }
 
         /// <summary>
