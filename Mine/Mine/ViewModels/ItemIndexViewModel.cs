@@ -64,6 +64,8 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
+            SetDataSource(CurrentDataSource);
+
             Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
@@ -85,6 +87,12 @@ namespace Mine.ViewModels
             MessagingCenter.Subscribe<ItemDeletePage, ItemModel>(this, "Update", async (obj, data) =>
             {
                 await Update(data as ItemModel);
+            });
+
+            // Register the Set Data Source Message
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            {
+                SetDataSource(data);
             });
         }
 
