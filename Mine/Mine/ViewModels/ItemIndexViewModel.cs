@@ -94,6 +94,12 @@ namespace Mine.ViewModels
             {
                 SetDataSource(data);
             });
+
+            MessagingCenter.Subscribe<AboutPage, bool>(this, "WipeDataList", (obj, data) =>
+            {
+                WipeDataList();
+            });
+
         }
 
         public bool SetDataSource(int isSQL)
@@ -113,6 +119,12 @@ namespace Mine.ViewModels
             SetNeedsRefresh(true);
 
             return true;
+        }
+
+        public void WipeDataList()
+        {
+            DataStore.WipeDataList();
+            SetNeedsRefresh(true);
         }
 
         /// <summary>
