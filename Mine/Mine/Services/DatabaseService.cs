@@ -44,5 +44,19 @@ namespace Mine.Services
         {
             return Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
         }
+
+        public async Task<bool> UpdateAsync(ItemModel item)
+        {
+            var data = await ReadAsync(item.Id);
+
+            if (data == null)
+            {
+                return false;
+            }
+
+            var result = await Database.UpdateAsync(item);
+
+            return (result == 1);
+        }
     }
 }
