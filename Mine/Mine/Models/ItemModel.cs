@@ -11,6 +11,7 @@
 
         public int Value { get; set; } = 0;
 
+        public ItemModel() { }
         public ItemModel(ItemModel data)
         {
             Id = data.Id;
