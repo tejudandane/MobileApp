@@ -11,6 +11,13 @@
 
         public int Value { get; set; } = 0;
 
+        public ItemModel(ItemModel data)
+        {
+            Id = data.Id;
+            Name = data.Name;
+            Description = data.Description;
+            Value = data.Value;
+        }
         public bool Update(ItemModel data)
         {
             // Do not update the Id , if you do, the record will be orphaned
