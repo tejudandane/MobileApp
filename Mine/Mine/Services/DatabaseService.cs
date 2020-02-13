@@ -58,5 +58,19 @@ namespace Mine.Services
 
             return (result == 1);
         }
+
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var item = await ReadAsync(id);
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            var result = await Database.DeleteAsync(item);
+
+            return (result == 1);
+        }
     }
 }
