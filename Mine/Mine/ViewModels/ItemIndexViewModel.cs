@@ -84,7 +84,7 @@ namespace Mine.ViewModels
             });
 
             // Register the Update Message
-            MessagingCenter.Subscribe<ItemDeletePage, ItemModel>(this, "Update", async (obj, data) =>
+            MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
             {
                 await Update(data as ItemModel);
             });

@@ -28,7 +28,7 @@ namespace Mine.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemIndexViewModel();
+            BindingContext = viewModel = ItemIndexViewModel.Instance;
         }
 
         /// <summary>
@@ -67,6 +67,11 @@ namespace Mine.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (viewModel.NeedsRefresh())
+            {
+                viewModel.LoadDatasetCommand.Execute(null);
+            }
 
             // If no data, then reload the data
             if (viewModel.Dataset.Count == 0)

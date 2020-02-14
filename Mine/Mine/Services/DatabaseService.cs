@@ -83,7 +83,7 @@ namespace Mine.Services
         {
             Database.DropTableAsync<ItemModel>().GetAwaiter().GetResult();
             Database.CreateTablesAsync(CreateFlags.None, typeof(ItemModel)).ConfigureAwait(false).GetAwaiter().GetResult();
-        }
+        }   
 
     }
 }
